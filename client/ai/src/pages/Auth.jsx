@@ -1,6 +1,8 @@
 import React from 'react'
 import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
+import { signInWithPopup } from 'firebase/auth';
+import { auth, provider } from '../utils/firebase';
 
 const features = [
   {
@@ -64,7 +66,19 @@ function FeatureCard({ icon, title, des, bg }) {
   );
 }
 
+// Google Verification
 const Auth = () => {
+  const handleGooleAuth = async()=>{
+    try {
+      const responce = await signInWithPopup(auth, provider)
+      const user= responce.user
+      const name = user.displayName
+      const email = user.email
+      
+    } catch (error) {
+      console.error('Google sign-in failed:', error);
+    }
+  }
   return (
     <div className="min-h-screen bg-white font-sans">
 
@@ -93,11 +107,11 @@ const Auth = () => {
             Unlock Smart<br />AI Notes
           </h1>
 
-          <motion.button
+          <motion.button 
             className="flex items-center gap-2 bg-[#2d2d2d] text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md mb-5 cursor-pointer"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 250, damping: 18 }}
+            transition={{ type: "spring", stiffness: 250, damping: 18 }} onClick={handleGooleAuth}
           >
             <FcGoogle className="text-lg bg-white rounded-full p-0.5" />
             Continue with Google
