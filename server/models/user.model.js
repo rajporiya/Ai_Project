@@ -1,7 +1,7 @@
 import mongoose, { Types } from 'mongoose'
 const userSchema = new mongoose.Schema({
     name : {
-        Type :  String,
+        type :  String,
         required : true
     },
     email :{
@@ -19,9 +19,8 @@ const userSchema = new mongoose.Schema({
         default: true
     },
     notes: {
-        type:[mongoose.Schema.Types.ObjectId],
-        ref: "Note",
-        default:[]
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Note" }],
+        default: []
     }
 }, {timestamps: true})
 

@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from 'firebase/auth';
 import { auth, provider } from '../utils/firebase';
+import axios from 'axios'
+import { serverUrl } from '../App';
 
 const features = [
   {
@@ -74,6 +76,11 @@ const Auth = () => {
       const user= responce.user
       const name = user.displayName
       const email = user.email
+
+      const result = await axios.post(serverUrl + "/api/auth/google", {name, email},{
+        withCredentials:true
+      })
+      console.log(responce.data);
       
     } catch (error) {
       console.error('Google sign-in failed:', error);

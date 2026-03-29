@@ -3,6 +3,9 @@ import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import Auth from './pages/Auth'
 
+// backend url
+export const serverUrl = "http://localhost:5000"
+
 const App = () => {
   return (
     <>
